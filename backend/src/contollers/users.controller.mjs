@@ -36,3 +36,21 @@ export const filterUsers = async(req, res) => {
         }
     })
 }
+// **********************************adding a user to the database*********************************
+
+export const addUser = async(req, res) => {
+    const {username, password, email, is_admin} = req.body
+
+    const newUser = await prisma.users.create({
+        data: {
+            username: username,
+            password: password,
+            email: email,
+            is_admin: is_admin
+        }
+    })
+    console.log(newUser)
+    return res.send(newUser)
+}
+
+

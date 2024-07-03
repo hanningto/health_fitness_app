@@ -1,20 +1,20 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
-import router from "./routes/users.routes.mjs";
 
-const prisma = new PrismaClient();
+
+import router from "./routes/users.routes.mjs";
+import workoutRouter from "./routes/workout.routes.mjs";
+import progressRouter from "./routes/progress.route.mjs";
+import goalsRouter from "./routes/goals.route.mjs";
+import activitiesRoute from "./routes/activities.route.mjs";
 
 const app = express();
 
 app.use(express.json())
-app.use('/api/users/', router)
-
-
-
-
-
-
-
+app.use('/api/', router)
+app.use('/api/', workoutRouter)
+app.use('/api/', progressRouter)
+app.use('/api', goalsRouter)
+app.use('/api', activitiesRoute)
 
 
 
