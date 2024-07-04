@@ -1,0 +1,58 @@
+{
+"workouts": [
+        {
+          "workout_id": 7,
+          "user_id": 1,
+          "type": "Running",
+          "duration": 30,
+          "intensity": "Medium",
+          "notes": "Morning run in the park",
+          "logged_at": "2024-07-02T12:00:00.000Z"
+        },
+        {
+          "workout_id": 8,
+          "user_id": 1,
+          "type": "Yoga",
+          "duration": 60,
+          "intensity": "Low",
+          "notes": "Relaxing yoga session",
+          "logged_at": "2024-07-02T13:00:00.000Z"
+        },
+        {
+          "workout_id": 9,
+          "user_id": 2,
+          "type": "Weightlifting",
+          "duration": 45,
+          "intensity": "High",
+          "notes": "Chest and triceps workout",
+          "logged_at": "2024-07-02T14:00:00.000Z"
+        },
+        {
+          "workout_id": 10,
+          "user_id": 2,
+          "type": "Cycling",
+          "duration": 45,
+          "intensity": "Medium",
+          "notes": "Evening cycling",
+          "logged_at": "2024-07-02T23:00:00.000Z"
+        },
+        {
+          "workout_id": 11,
+          "user_id": 3,
+          "type": "HIIT",
+          "duration": 20,
+          "intensity": "High",
+          "notes": "Intense HIIT workout",
+          "logged_at": "2024-07-03T00:00:00.000Z"
+        },
+        {
+          "workout_id": 12,
+          "user_id": 3,
+          "type": "Swimming",
+          "duration": 30,
+          "intensity": "Medium",
+          "notes": "Swimming at the local pool",
+          "logged_at": "2024-07-03T01:00:00.000Z"
+        }
+      ]
+}
