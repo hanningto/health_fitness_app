@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { addUser, filterUsers, getAllUsers, getOneUser } from "../contollers/users.controller.mjs";
+import { createUser, filterUsers, getAllUsers, getOneUser, login } from "../contollers/users.controller.mjs";
 
 const router = Router()
 
-router.route('/users')
+router.route('/register')
         .get(getAllUsers)
         .get(filterUsers)
-        .post(addUser)
+        .post(createUser)
 
-router.route('/users/:id')
-        .get(getOneUser)
+router.route('/login')
+        .post(login)
 
 
 export default router
