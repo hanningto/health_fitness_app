@@ -34,19 +34,32 @@ export const filterUsers = async (req, res) => {
   const {
     query: { filter, value },
   } = req;
-  const result = prisma.users.findMany({
-    where: {
-      filter: value,
-    },
-  });
+
+  try {
+    const result = await prisma.users.findMany({
+      where: {
+        [filter]: value,
+      },
+    });
+    return res.send(result);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Failed to filter users" });
+  }
 };
+
 // **********************************adding a user to the database*********************************
 
 const JWT_SECRET = "your_jwt_secret_key";
 export const createUser = async (req, res) => {
   const { username, password, email } = req.body;
-
+  console.log("getting bogy ", username)
+  console.log('Received request with:', req.body);
+  if (!username || !email || !password) {
+    return res.status(400).json({ error: 'Username, email, and password are required' });
+  }
   try {
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await prisma.users.create({
       data: {
@@ -57,17 +70,18 @@ export const createUser = async (req, res) => {
     });
 
     return res
-      .status(201)
+      .status(200)
       .json({ message: "user registered successfully", newUser });
   } catch (error) {
     console.log(error);
-    return res.status(400).json({ message: "Registration Failed", newUser });
+    return res.status(400).json({ message: "Registration Failed", error });
   }
 };
 
+//**************************lOGIN  */
 export const login = async (req, res) => {
   const { username, password } = req.body;
-
+  console.log(username)
   try {
     const user = await prisma.users.findUnique({
       where: { username },
@@ -82,10 +96,19 @@ export const login = async (req, res) => {
         res.status(400).json({ error: "Invalid username or password" });
       }
 
-      const token = jwt.sign({ userId: user.user_id }, JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        { userId: user.user_id },
+        JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
 
+      res.cookie("token", token, {
+        httpOnly: true,
+        signed: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      })
       res.json({ message: "Login Successfull" });
     }
   } catch (error) {
@@ -93,3 +116,12 @@ export const login = async (req, res) => {
     res.status(400).json({ error: "Login Failed" });
   }
 };
+
+
+
+//*************************LOGOUT */
+
+export const logout = (req, res) => {
+  res.clearCookie("token")
+  res.send({message: "Logged out Successfully"})
+} 
