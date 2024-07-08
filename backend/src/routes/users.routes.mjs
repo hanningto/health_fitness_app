@@ -1,15 +1,25 @@
 import { Router } from "express";
-import { addUser, filterUsers, getAllUsers, getOneUser } from "../contollers/users.controller.mjs";
+import {
+        createUser,
+        filterUsers,
+        getAllUsers,
+        getOneUser,
+        login,
+        logout,
+} from "../contollers/users.controller.mjs";
 
-const router = Router()
+const router = Router();
 
-router.route('/users')
+router.route("/")
+        .get(filterUsers);
+
+router.route("/register")
         .get(getAllUsers)
-        .get(filterUsers)
-        .post(addUser)
+        .post(createUser);
 
-router.route('/users/:id')
-        .get(getOneUser)
+router.route("/login")
+        .post(login);
+router.route("/logout")
+        .post(logout)
 
-
-export default router
+export default router;

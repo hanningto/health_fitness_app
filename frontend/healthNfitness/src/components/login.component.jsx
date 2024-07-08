@@ -24,6 +24,7 @@ function LoginComponent({ onLogin}) {
     }
     else{
         // Erro Handling
+        alart('Login failed')
         alart('')
     }
 
