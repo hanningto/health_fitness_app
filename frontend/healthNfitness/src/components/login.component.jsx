@@ -46,6 +46,7 @@ function LoginComponent() {
     }
   };
 
+
   return (
     <div>
       <Box maxW="md" mx="auto" mt={8} p={6} borderWidth={1} borderRadius="lg">
