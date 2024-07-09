@@ -1,9 +1,16 @@
 import { Router } from "express";
-import { getAllWorkoutLogs } from "../contollers/workout.contoller.mjs";
+import {checkSchema} from "express-validator"
 
-const workoutRouter = Router()
+import {
+  getAllWorkoutLogs,
+  LogWorkout,
+} from "../contollers/workout.contoller.mjs";
+import { workoutLogSchema } from "../utils/validationSchemas/workoutSchema.mjs";
 
-workoutRouter.route('/workouts')
-        .get(getAllWorkoutLogs)
+const workoutRouter = Router();
 
-export default workoutRouter
+workoutRouter.route("/workouts")
+                .get(getAllWorkoutLogs)
+                .post(LogWorkout, checkSchema(workoutLogSchema) );
+
+export default workoutRouter;
