@@ -16,16 +16,17 @@ import {
   loginSuccess,
   startLoading,
 } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function LoginComponent() {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.user);
-  const [username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const navigate = useNavigate();
+  const { loading, error, token } = useSelector((state) => state.user);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   //Handle Form Submit
   const handleSubmit = async (event) => {
-
     event.preventDefault();
     dispatch(startLoading());
 
@@ -35,17 +36,26 @@ function LoginComponent() {
         password: password,
       });
       if (response.status === 200) {
-        const data = await response.json();
-        dispatch(loginSuccess(data));
-      } else {
-        const errorData = await response.json();
-        dispatch(loginFailure(errorData));
+        const {token, user, message} = await response.data;
+        localStorage.setItem('token', token)
+        localStorage.setItem("user", JSON.stringify(user))
+        dispatch(loginSuccess(user));
+        console.log('redirecting')
+        //getting user data
+        const userdata = localStorage.getItem('user')
+        const parsedData = JSON.parse(userdata)
+        console.log(parsedData.username)
+        navigate('/workout-log');
+      }else if(response.status === 400){
+        const {error} = await response.data;
+        console.log(error)
+        dispatch(loginFailure(error.error));
       }
     } catch (error) {
+      console.log(error.mesaage)
       dispatch(loginFailure(error.message));
     }
   };
-
 
   return (
     <div>
@@ -70,9 +80,8 @@ function LoginComponent() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              
             </FormControl>
-            
+            {error && <Box color="red.500">{error}</Box>}
             <Button type="submit" colorScheme="teal" size="md" width="full">
               Login
             </Button>
