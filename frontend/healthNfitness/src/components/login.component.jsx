@@ -45,7 +45,7 @@ function LoginComponent() {
         const userdata = localStorage.getItem('user')
         const parsedData = JSON.parse(userdata)
         console.log(parsedData.username)
-        navigate('/workout-log');
+        navigate('/dashboard');
       }else if(response.status === 400){
         const {error} = await response.data;
         console.log(error)
