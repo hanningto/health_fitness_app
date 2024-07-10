@@ -11,6 +11,7 @@ const workoutRouter = Router();
 
 workoutRouter.route("/workouts")
                 .get(getAllWorkoutLogs)
-                .post(LogWorkout, checkSchema(workoutLogSchema) );
+                .post(LogWorkout );
 
 export default workoutRouter;
+

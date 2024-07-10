@@ -11,21 +11,23 @@ export const getAllWorkoutLogs = async (req, res) => {
   res.send(allworkoutLogs);
 };
 
-//***********************Logging ***************/
+//***********************Workout Logging ***************/
 
 export const LogWorkout = async (req, res) => {
-  const { user_id, type, duration, intensity, notes } = req.body;
+  const { userId, type, duration, intensity, notes } = req.body;
+  const parsedDurations = parseInt(duration)
+
 
   try {
     const workout = await prisma.workouts.create({
       data: {
         type: type,
-        duration: duration,
+        duration: parsedDurations,
         intensity: intensity,
         notes: notes,
         users: {
           connect: {
-            user_id: user_id,
+            user_id: userId
           },
         },
       },
@@ -33,6 +35,7 @@ export const LogWorkout = async (req, res) => {
 
     res.status(201).json({message: "Log sucessfull", data:workout }, )
   } catch (error) {
+    console.log("Log unsuccessfull")
     res.send(error)
   }
 };
