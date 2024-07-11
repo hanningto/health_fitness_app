@@ -31,7 +31,7 @@ model meals {
   meal_id   Int       @id @default(autoincrement())
   user_id   Int?
   meal_date DateTime  @db.Date
-  meal_time DateTime  @db.Time(0)
+  meal_time String  @db.VarChar(8)
   food_type String    @db.VarChar(50)
   calories  Int
   notes     String?   @db.Text

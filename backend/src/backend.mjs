@@ -8,6 +8,10 @@ import workoutRouter from "./routes/workout.routes.mjs";
 import progressRouter from "./routes/progress.route.mjs";
 import goalsRouter from "./routes/goals.route.mjs";
 import activitiesRoute from "./routes/activities.route.mjs";
+import mealsRouter from "./routes/meals.route.mjs";
+import sleepRouter from "./routes/sleep.route.mjs";
+import waterIntakeRouter from "./routes/waterIntake.route.mjs";
+import foodTypeRouter from "./routes/foodType.route.mjs";
 
 const app = express();
 
@@ -20,6 +24,10 @@ app.use('/api/', workoutRouter)
 app.use('/api/', progressRouter)
 app.use('/api', goalsRouter)
 app.use('/api', activitiesRoute)
+app.use('/api/', mealsRouter)
+app.use('/api/', sleepRouter)
+app.use('/api', waterIntakeRouter)
+app.use('/api', foodTypeRouter)
 
 
 
