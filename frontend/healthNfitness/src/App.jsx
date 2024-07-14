@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+// import "./App.css";
 import LoginComponent from "./components/login.component";
 import RegistrationComponent from "./components/registration.component";
 import WorkoutComponent from "./components/workout.component";
@@ -16,15 +16,22 @@ import Dashboard from "./components/dashboard.component";
 import MealLogForm from "./components/mealsLog.component";
 import LogWaterIntake from "./components/waterIntake.component";
 import LogSleep from "./components/sleep.component";
+import GoalSetting from "./components/setGoals.component";
+import { useSelector } from "react-redux";
+import NavigationDrawer from "./components/Drawer.component";
+import GoalProgressComponent from "./components/progress.component";
 
 
 
 
 function App() {
+const {authenticated} = useSelector((state) => state.user)
+
   const [showLogin, setShowLogin] = useState(true);
   return (
     <>
       <Router>
+      <NavigationDrawer isAuthenticated={authenticated} />
           <Routes>
             
             <Route path="/login" Component={LoginComponent} />
@@ -34,10 +41,12 @@ function App() {
               element={<PrivateRoute component={<Dashboard />} />}
             />
             <Route path="/workout" Component={LogWorkoutsComponent}/>
+            <Route path="/set-goals" Component={GoalSetting}/>
             <Route path="/log-water" Component={LogWaterIntake}/>
             <Route path="/meal-log" Component={MealLogForm}/>
             <Route path="/sleep" Component={LogSleep}/>
-            <Route path="*" element={<Navigate to="/login" replace />} />
+            <Route path="/progress" Component={GoalProgressComponent}/>
+
           </Routes>
       </Router>
     </>
@@ -55,3 +64,4 @@ export default App;
 <LogWorkoutsComponent/>
 </Box> */
 }
+{/* <Route path="*" element={<Navigate to="/login" replace />} /> */}

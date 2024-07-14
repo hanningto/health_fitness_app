@@ -31,6 +31,12 @@ function Dashboard() {
             <Link as={RouterLink} to="/log-water">Log Water Intake</Link>
           </Box>
         </GridItem>
+        <GridItem>
+          <Box p={5} borderWidth="1px" borderRadius="lg" overflow="hidden">
+            <Heading as="h3" size="md" mb={2}>Set Your Goals</Heading>
+            <Link as={RouterLink} to="/set-goals">Set Goal</Link>
+          </Box>
+        </GridItem>
         <GridItem colSpan={3}>
           <Box p={5} borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Heading as="h3" size="md" mb={2}>View Your Progress</Heading>

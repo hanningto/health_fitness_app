@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { calculateGoalProgress } from "../utils/helperFuntions/progressCalculator.mjs";
 
 const prisma = new PrismaClient();
 
@@ -9,46 +10,24 @@ export const allProgresses = async (req, res) => {
   console.log(progress);
   res.send(progress);
 };
+//********************Log progress */
 
-//*****************************calculate user progress */
+export const logProgress = async(req, res) => {
+  const { user_id, goal_id, progress_date, progress_value } = req.body;
 
-export const getUserProgress = async (req, res) => {
-  const {
-    params: { id },
-  } = req;
-
-
-  const UserId = parsedInt(id);
-
-  try{
-    const goals = await prisma.goals.findMany({
-        where: {
-            user_id: UserId,
-            include: {
-                progress: true
-
-            }
-        }
-    })
-
-    const workouts = await prisma.workouts.findMany({
-        where: {
-            user_id: UserId
-        }
-    })
-
-    const goalProgress = goals.map((goal) =>{
-        let progressValue = 0
-
-        switch(goal.goal_type){
-            case 'steps':
-                
-            
-        }
-    })
-
+  try {
+    const newProgress = await prisma.progress.create({
+      data: {
+        user_id,
+        goal_id,
+        progress_date: new Date(progress_date),
+        progress_value,
+      },
+    });
+    res.status(201).json(newProgress);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
-  catch{
+}
 
-  }
-};
+

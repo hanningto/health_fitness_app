@@ -12,6 +12,7 @@ import mealsRouter from "./routes/meals.route.mjs";
 import sleepRouter from "./routes/sleep.route.mjs";
 import waterIntakeRouter from "./routes/waterIntake.route.mjs";
 import foodTypeRouter from "./routes/foodType.route.mjs";
+import progressDetailsRouter from "./routes/GoalProgress.route.mjs";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/api/', mealsRouter)
 app.use('/api/', sleepRouter)
 app.use('/api', waterIntakeRouter)
 app.use('/api', foodTypeRouter)
+app.use('/api', progressDetailsRouter)
 
 
 
