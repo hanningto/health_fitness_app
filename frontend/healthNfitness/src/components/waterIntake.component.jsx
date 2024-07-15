@@ -42,7 +42,7 @@ const LogWaterIntake = () => {
   };
 
   return (
-    <Box p={5}>
+    <Box p={5} marginLeft="90px" marginRight="500px">
       <Heading as="h1" size="lg" mb={6} textAlign="center">
         Log Water Intake
       </Heading>
@@ -56,7 +56,7 @@ const LogWaterIntake = () => {
               onChange={(e) => setIntakeDate(e.target.value)}
             />
           </FormControl>
-          <FormControl id="intake-amount" isRequired>
+          <FormControl id="intake-amount" border="none" isRequired>
             <FormLabel>Intake Amount (ml)</FormLabel>
             <Input
               type="number"
@@ -65,7 +65,7 @@ const LogWaterIntake = () => {
             />
           </FormControl>
          
-          <Button type="submit" colorScheme="teal" size="md" width="full">
+          <Button type="submit" colorScheme="teal" size="md" width="" >
             Log Water Intake
           </Button>
         </VStack>
