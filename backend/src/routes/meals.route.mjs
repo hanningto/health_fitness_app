@@ -1,11 +1,15 @@
 import {Router} from "express"
-import { allMeals, createMeal, getMeals } from "../contollers/meals.controller.mjs"
+import { allMeals, createMeal, deleteMeal, getMeals, updateMeal } from "../contollers/meals.controller.mjs"
 
 const mealsRouter = Router()
 
 mealsRouter.route('/meals')
                 .get(allMeals)
                 .post(createMeal)
+mealsRouter.route('/meals/:id')
+                .delete(deleteMeal)
+                .patch(updateMeal)
+
 
 
 

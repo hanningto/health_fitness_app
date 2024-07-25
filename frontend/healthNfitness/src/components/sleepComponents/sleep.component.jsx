@@ -7,17 +7,25 @@ import {
   Input,
   VStack,
   Heading,
+  Flex,
 } from '@chakra-ui/react';
 import axios from 'axios';
+import DisplaySleepsComponent from './sleepDisplay.component';
+import SleepChartComponents from './sleepChart.components';
 
 const LogSleep = () => {
   const [sleepDate, setSleepDate] = useState('');
   const [sleepDuration, setSleepDuration] = useState('');
   const [notes, setNotes] = useState('');
 
+  const userdata = localStorage.getItem("user");
+  const parsedData = JSON.parse(userdata);
+  const userId = parsedData.user_id;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const sleepData = {
+      user_id: userId,
       sleep_date: sleepDate,
       sleep_duration: parseInt(sleepDuration),
       notes: notes,
@@ -70,6 +78,10 @@ const LogSleep = () => {
           </Button>
         </VStack>
       </form>
+      <Flex>
+        <Box><DisplaySleepsComponent/></Box>
+        <Box><SleepChartComponents/></Box>
+      </Flex>
     </Box>
   );
 };

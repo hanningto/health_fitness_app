@@ -33,12 +33,12 @@ export const setGoal = async (req, res) => {
 //***********************Update goal
 
 export const updateGoal = async(req, res) => {
-    const { goalId } = req.params;
+    const { id } = req.params;
   const { goal_type, target_value, start_date, end_date } = req.body;
 
   try {
     const updatedGoal = await prisma.goals.update({
-      where: { goal_id: parseInt(goalId) },
+      where: { goal_id: parseInt(id) },
       data: {
         goal_type: goal_type,
         target_value: target_value,
@@ -53,11 +53,11 @@ export const updateGoal = async(req, res) => {
 }
 //****************************delete goal */
 export const deleteGoal= async(req, res) => {
-    const { goalId } = req.params;
+    const { id } = req.params;
 
     try {
       await prisma.goals.delete({
-        where: { goal_id: parseInt(goalId) },
+        where: { goal_id: parseInt(id) },
       });
       res.status(200).json({ message: 'Goal deleted successfully' });
     } catch (error) {

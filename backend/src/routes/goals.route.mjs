@@ -1,13 +1,19 @@
 import { Router } from "express";
-import { allGoals, deleteGoal, setGoal, updateGoal } from "../contollers/goals.controller.mjs";
+import {
+    allGoals,
+    deleteGoal,
+    setGoal,
+    updateGoal,
+} from "../contollers/goals.controller.mjs";
 
-const goalsRouter=  Router()
+const goalsRouter = Router();
 
-goalsRouter.route('/goals')
+goalsRouter.route("/goals")
                 .get(allGoals)
-                .post(setGoal)
-                .patch(updateGoal)
+                .post(setGoal);
+
+goalsRouter.route("/goals/:id")
                 .delete(deleteGoal)
+                .patch(updateGoal);
 
-
-export default goalsRouter
+export default goalsRouter;

@@ -63,3 +63,35 @@ export const progress = async(req, res) => {
     res.status(500).json({ error: error.message });
   }
 }
+
+export const singleprogress = async (req, res) => {
+  const { params: { id } } = req;
+
+  try {
+    const goal = await prisma.goals.findUnique({
+      where: {
+        goal_id: parseInt(id),
+      },
+      include: {
+        progress: true,
+      },
+    });
+
+    if (!goal) {
+      return res.status(404).json({ error: "Goal not found" });
+    }
+
+    const totalProgress = goal.progress.reduce((acc, curr) => acc + curr.progress_value, 0);
+
+    const progressData = {
+      goal_id: goal.goal_id,
+      goal_type: goal.goal_type,
+      target_value: goal.target_value,
+      current_progress: totalProgress,
+    };
+
+    res.status(200).json(progressData);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

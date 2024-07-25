@@ -44,3 +44,18 @@ export const waterIntake = async(req, res) => {
     
   }
 }
+
+
+export const deleteWaterLog = async(req, res) => {
+  const {params : {id}} = req
+  try {
+    await prisma.water_intake.delete({
+      where: {
+        intake_id: parseInt(id)
+      }
+    })
+    res.status(200).json({message: "Log Deleted Successfully"})
+  } catch (error) {
+    res.status(500).json({error: "unable to delete Log"})
+  }
+}

@@ -85,6 +85,10 @@ export const login = async (req, res) => {
   try {
     const user = await prisma.users.findUnique({
       where: { username: username },
+      include: {
+        meals: true
+      }
+
     });
 
     if (!user) {

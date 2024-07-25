@@ -74,7 +74,7 @@ console.log(progressData)
             <Text mb={2}>Target Value: {goal.target_value}</Text>
             <Text mb={2}>Current Progress: {goal.current_progress}</Text>
             <CircularProgress value={(goal.current_progress / goal.target_value) * 100} color='green.400' size='120px' thickness='15px'>
-  <CircularProgressLabel>{(goal.current_progress / goal.target_value) * 100}%</CircularProgressLabel>
+  <CircularProgressLabel>{((goal.current_progress / goal.target_value) * 100).toFixed(1)}%</CircularProgressLabel>
 </CircularProgress>
 
           </Box>
